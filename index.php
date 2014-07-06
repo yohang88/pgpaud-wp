@@ -1,125 +1,85 @@
 <?php get_header() ?>
 
-<section id="home-carousel">
-
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-<!--
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
- -->
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-
-            <?php
-                $cat    = get_category_by_slug( 'berita' );
-                $cat_id = $cat->term_id;
-                $args   = array(
-                            'category'    => $cat_id,
-                            'numberposts' => 2,
-                            );
-
-                $recent_posts = get_posts( $args );
-
-                $n = 1;
-
-                foreach($recent_posts as $post):
-                    setup_postdata( $post );
-            ?>
-            <div class="item <?php echo ( $n != 1 ?: 'active') ?>">
-                <div class="carousel-content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="table-row">
-                                <div class="col-sm-5 table-cell">
-                                    <div class="full-width">
-                                        <?php mytheme_post_thumbnail('carousel-featured') ?>
-                                    </div>
-                                </div>
-                                <div class="col-sm-7 table-cell" style="vertical-align: middle">
-                                    <a href="<?php the_permalink() ?>"><h2 class="animated fadeInUp" data-animate-delay="1s"><?php the_title() ?></h2></a>
-                                    <div class="animated fadeInUp" data-animate-delay="2s"><?php the_excerpt() ?></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-caption"></div>
-            </div>
-
-            <?php $n++; endforeach; ?>
-        </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
-    </div>
-
-</section>
-
-
-
-<section id="main-content">
-
+<section id="wrapper">
     <div class="container">
-
         <div class="row">
-
-            <div class="col-sm-4">
-                <div id="home-sidebar">
-                    <a href="#" class="btn btn-default btn-lg btn-sidebar-nav">
-                        <i class="fa fa-star"></i>
-                        Informasi <br /> <strong> Penerimaan Mahasiswa Baru </strong>
-                    </a>
-
-                    <a href="#" class="btn btn-default btn-lg btn-sidebar-nav">
-                        <i class="fa fa-bar-chart-o"></i>
-                        Portal Akademik <br /> <strong> Mahasiswa &amp; Dosen </strong>
-                    </a>
-
-                    <a href="#" class="btn btn-default btn-lg btn-sidebar-nav">
-                        <i class="fa fa-paperclip"></i>
-                        Informasi <br /> <strong> Jadwal Kuliah </strong>
-                    </a>
-
-                    <a href="#" class="btn btn-default btn-lg btn-sidebar-nav">
-                        <i class="fa fa-globe"></i>
-                        Informasi <br /> <strong> Beasiswa </strong>
-                    </a>
-
-                    <a href="#" class="btn btn-default btn-lg btn-sidebar-nav">
-                        <i class="fa fa-calendar"></i>
-                        Informasi <br /> <strong> Kalender Akademik </strong>
-                    </a>
-
-                    <a href="#" class="btn btn-default btn-lg btn-sidebar-nav">
-                        <i class="fa fa-users"></i>
-                        Profil <br /> <strong> Dosen dan Staff </strong>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-sm-8">
-
-                <div class="row">
-
-                    <div class="col-md-7">
-                        <div class="home-article">
-                            <h3>Berita Terbaru</h3>
+            <div id="wrapper-content">
+                <div id="wrapper-content-top">
+                    <div class="col-sm-3">
+                        <ul id="quicklinks-carousel" class="nav nav-pills nav-stacked">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Messages</a></li>
+                            <li><a href="#">Messages</a></li>
+                            <li><a href="#">Messages</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
 
                             <?php
                                 $cat    = get_category_by_slug( 'berita' );
                                 $cat_id = $cat->term_id;
                                 $args   = array(
                                             'category'    => $cat_id,
-                                            'numberposts' => 1,
+                                            'numberposts' => 5,
+                                            );
+
+                                $recent_posts = get_posts( $args );
+
+                                $n = 0;
+
+                                foreach($recent_posts as $post):
+                                    setup_postdata( $post );
+                            ?>
+                                <li data-target="#header-carousel" data-slide-to="<?php echo $n ?>" class="<?php echo ($n == 0 ? "active" : "") ?>"></li>
+
+                            <?php $n++; endforeach; ?>
+
+                            </ol>
+                            <div class="carousel-inner">
+                                <?php
+
+                                    $n = 0;
+
+                                    foreach($recent_posts as $post):
+                                        setup_postdata( $post );
+                                ?>
+
+                                <div class="item <?php echo ($n == 0 ? "active" : "") ?>">
+                                    <?php mytheme_post_thumbnail('thumb-single') ?>
+                                </div>
+
+                                <?php $n++; endforeach; ?>
+                            </div>
+                            <a class="left carousel-control" href="#header-carousel" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#header-carousel" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="block common">
+                            <h2><i class="fa fa-clock-o fa-lg fa-fw"></i> UAD News</h2>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+
+                <div class="col-sm-4">
+                    <div class="block common spotlight-top">
+                        <h2><i class="fa fa-clock-o fa-lg fa-fw"></i> Events</h2>
+                        <div class="row">
+                            <?php
+                                $cat    = get_category_by_slug( 'berita' );
+                                $cat_id = $cat->term_id;
+                                $args   = array(
+                                            'category'    => $cat_id,
+                                            'numberposts' => 2,
                                             );
 
                                 $recent_posts = get_posts( $args );
@@ -128,161 +88,168 @@
                                     setup_postdata( $post );
                             ?>
 
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <?php mytheme_post_thumbnail('thumb-square') ?>
-                                </div>
-                                <div class="col-sm-8">
-                                    <h4><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h4>
+                            <div class="col-md-6">
+                                <a href="<?php the_permalink() ?>">
+                                    <?php mytheme_post_thumbnail('thumb-single') ?>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="article-title"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h3>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="block common spotlight-top">
+                        <h2><i class="fa fa-heart fa-lg fa-fw"></i> Announcements</h2>
+                        <div class="row">
+                            <?php
+                                $cat    = get_category_by_slug( 'berita' );
+                                $cat_id = $cat->term_id;
+                                $args   = array(
+                                            'category'    => $cat_id,
+                                            'numberposts' => 2,
+                                            );
+
+                                $recent_posts = get_posts( $args );
+
+                                foreach($recent_posts as $post):
+                                    setup_postdata( $post );
+                            ?>
+
+                            <div class="col-md-6">
+                                <a href="<?php the_permalink() ?>">
+                                    <?php mytheme_post_thumbnail('thumb-single') ?>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="article-title"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h3>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="block common spotlight-top">
+                        <h2><i class="fa fa-heart fa-lg fa-fw"></i> Research &amp; Publications</h2>
+                        <div class="row">
+
+                            <?php
+                                $cat    = get_category_by_slug( 'berita' );
+                                $cat_id = $cat->term_id;
+                                $args   = array(
+                                            'category'    => $cat_id,
+                                            'numberposts' => 2,
+                                            );
+
+                                $recent_posts = get_posts( $args );
+
+                                foreach($recent_posts as $post):
+                                    setup_postdata( $post );
+                            ?>
+
+                            <div class="col-md-6">
+                                <a href="<?php the_permalink() ?>">
+                                    <?php mytheme_post_thumbnail('thumb-single') ?>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="article-title"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h3>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <?php endforeach; ?>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-sm-8">
+                    <div id="home-latest-news" class="block common">
+                        <h2><i class="fa fa-heart fa-lg fa-fw"></i> Lastest News</h2>
+
+                        <div class="row">
+
+                            <?php
+                                $cat    = get_category_by_slug( 'berita' );
+                                $cat_id = $cat->term_id;
+                                $args   = array(
+                                            'category'    => $cat_id,
+                                            'numberposts' => 5,
+                                            );
+
+                                $recent_posts = get_posts( $args );
+
+                                foreach($recent_posts as $post):
+                                    setup_postdata( $post );
+                            ?>
+
+                            <div class="col-xs-12 col-sm-5 col-md-3">
+                                <a href="<?php the_permalink() ?>">
+                                    <?php mytheme_post_thumbnail('thumb-single') ?>
+                                </a>
+                            </div>
+                            <div class="col-xs-12 col-sm-7 col-md-9">
+                                <h3 class="article-title"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h3>
+                                <div class="article-content">
                                     <?php the_excerpt() ?>
                                 </div>
                             </div>
 
                             <?php endforeach; ?>
 
-                            <?php
-                                $cat    = get_category_by_slug( 'berita' );
-                                $cat_id = $cat->term_id;
-                                $args   = array(
-                                            'category'    => $cat_id,
-                                            'numberposts' => 4,
-                                            'offset'      => 1,
-                                            );
-
-                                $recent_posts = get_posts( $args );
-
-                                foreach($recent_posts as $post):
-                                    setup_postdata( $post );
-                            ?>
-
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <strong><?php echo get_the_date() ?></strong>
-                                </div>
-                                <div class="col-sm-8">
-                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
-                                </div>
-                            </div>
-
-                            <?php endforeach; ?>
-
-
-                            <div class="clearfix" style="margin-bottom: 35px"></div>
-
-                            <h3>Artikel Terbaru</h3>
-                            <?php
-                                $cat    = get_category_by_slug( 'berita' );
-                                $cat_id = $cat->term_id;
-                                $args   = array(
-                                            'category'    => $cat_id,
-                                            'numberposts' => 1,
-                                            );
-
-                                $recent_posts = get_posts( $args );
-
-                                foreach($recent_posts as $post):
-                                    setup_postdata( $post );
-                            ?>
-
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <?php mytheme_post_thumbnail('thumb-square') ?>
-                                </div>
-                                <div class="col-sm-8">
-                                    <h4><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h4>
-                                    <?php the_excerpt() ?>
-                                </div>
-                            </div>
-
-                            <?php endforeach; ?>
-
-                            <?php
-                                $cat    = get_category_by_slug( 'berita' );
-                                $cat_id = $cat->term_id;
-                                $args   = array(
-                                            'category'    => $cat_id,
-                                            'numberposts' => 4,
-                                            'offset'      => 1,
-                                            );
-
-                                $recent_posts = get_posts( $args );
-
-                                foreach($recent_posts as $post):
-                                    setup_postdata( $post );
-                            ?>
-
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <strong><?php echo get_the_date() ?></strong>
-                                </div>
-                                <div class="col-sm-8">
-                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
-                                </div>
-                            </div>
-
-                            <?php endforeach; ?>
                         </div>
                     </div>
-
-                    <div class="col-md-5">
-                        <div class="home-article">
-                            <h3>Pengumuman</h3>
-
-                            <?php
-                                $cat    = get_category_by_slug( 'berita' );
-                                $cat_id = $cat->term_id;
-                                $args   = array(
-                                            'category'    => $cat_id,
-                                            'numberposts' => 1,
-                                            );
-
-                                $recent_posts = get_posts( $args );
-
-                                foreach($recent_posts as $post):
-                                    setup_postdata( $post );
-                            ?>
-
-                            <?php mytheme_post_thumbnail('thumb-wide') ?>
-                            <h4><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h4>
-                            <?php the_excerpt() ?>
-
-                            <?php endforeach; ?>
-
-                            <?php
-                                $cat    = get_category_by_slug( 'berita' );
-                                $cat_id = $cat->term_id;
-                                $args   = array(
-                                            'category'    => $cat_id,
-                                            'numberposts' => 4,
-                                            'offset'      => 1,
-                                            );
-
-                                $recent_posts = get_posts( $args );
-
-                                foreach($recent_posts as $post):
-                                    setup_postdata( $post );
-                            ?>
-
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
-                                </div>
-                                <div class="col-xs-12">
-                                    <strong><?php echo get_the_date() ?></strong>
-                                </div>
-                            </div>
-
-                            <?php endforeach; ?>
-
-                        </div>
-                    </div>
-
                 </div>
+
+                <div class="col-sm-4">
+                    <div class="block common">
+                        <ul id="home-banner-links">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-android"></i>
+                                    <h4>Online Journal</h4>
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-android"></i>
+                                    <h4>Info Beasiswa</h4>
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-android"></i>
+                                    <h4>SI Akademik</h4>
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-android"></i>
+                                    <h4>Info Karir</h4>
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
             </div>
         </div>
-
     </div>
-
 </section>
 
 <?php get_footer() ?>
