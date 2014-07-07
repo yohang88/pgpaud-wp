@@ -13,7 +13,7 @@ body {
   font-size: 14px;
   text-rendering: optimizeLegibility;
   color: #4b4b4b;
-  background-color: #D88AD8;
+  background-color: #4b1945;
 }
 h1,
 h2,
@@ -64,7 +64,20 @@ h6 {
   background: inherit;
 }
 #main-header {
-  background-color: #660066;
+  position: relative;
+}
+#main-header:after {
+  content: "";
+  background-image: url('images/gedung-uad.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.35;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
 }
 #main-header div[class*='col-'] {
   padding-left: 0;
@@ -117,7 +130,6 @@ h6 {
   }
 }
 #main-footer {
-  background-color: #4b1945;
   padding: 20px 0;
   min-height: 200px;
   color: #fff;
@@ -226,40 +238,39 @@ nav#navigation-top .navbar-nav li.open ul.dropdown-menu li a:hover {
   font-size: 10pt;
 }
 @media (min-width: 768px) {
-  /*    #wrapper-content {
-        position: relative;
-    }
-
-    #wrapper-content:before {
-        content: '';
-        position: absolute;
-        z-index: -1;
-        bottom: 15px;
-        left: 10px;
-        width: 50%;
-        height: 20%;
-        box-shadow: 0 15px 10px #973C90;
-        -webkit-transform: rotate(-3deg) skew(-0deg);
-         -moz-transform: rotate(-3deg) skew(-0deg);
-         -ms-transform: rotate(-3deg) skew(-0deg);
-         -o-transform: rotate(-3deg) skew(-0deg);
-         transform: rotate(-3deg) skew(-0deg);
-    }
-    #wrapper-content:after {
-        content: '';
-        position: absolute;
-        z-index: -1;
-        bottom: 15px;
-        right: 10px;
-        width: 50%;
-        height: 20%;
-        box-shadow: 0 15px 10px #973C90;
-        -webkit-transform: rotate(3deg) skew(0deg);
-         -moz-transform: rotate(3deg) skew(0deg);
-         -ms-transform: rotate(3deg) skew(0deg);
-         -o-transform: rotate(3deg) skew(0deg);
-         transform: rotate(3deg) skew(0deg);
-    }*/
+  #wrapper-content {
+    position: relative;
+  }
+  #wrapper-content:before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    height: 20%;
+    box-shadow: 0 15px 10px #30062C;
+    -webkit-transform: rotate(-3deg) skew(0deg);
+    -moz-transform: rotate(-3deg) skew(0deg);
+    -ms-transform: rotate(-3deg) skew(0deg);
+    -o-transform: rotate(-3deg) skew(0deg);
+    transform: rotate(-3deg) skew(0deg);
+  }
+  #wrapper-content:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: 15px;
+    right: 10px;
+    width: 50%;
+    height: 20%;
+    box-shadow: 0 15px 10px #30062C;
+    -webkit-transform: rotate(3deg) skew(0deg);
+    -moz-transform: rotate(3deg) skew(0deg);
+    -ms-transform: rotate(3deg) skew(0deg);
+    -o-transform: rotate(3deg) skew(0deg);
+    transform: rotate(3deg) skew(0deg);
+  }
 }
 #single-header .jumbotron {
   padding: 0;
@@ -339,7 +350,14 @@ nav#navigation-top .navbar-nav li.open ul.dropdown-menu li a:hover {
   font-size: 10pt;
 }
 #quicklinks-carousel {
-  margin-top: 15px;
+  margin-top: 0px;
+  margin-bottom: 15px;
+}
+@media (min-width: 768px) {
+  #quicklinks-carousel {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
 }
 #quicklinks-carousel.nav-pills > li > a {
   border-radius: 0;
